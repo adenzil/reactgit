@@ -1,5 +1,7 @@
 import React from "react";
 
+import $ from 'jquery';
+
 import List from "./List";
 import Search from "./Search";
 import User from "./User";
@@ -21,8 +23,25 @@ export default class Page extends React.Component{
 		};
 	}
 
-	updateSearch(data){
-    	this.setState({data});
+	updateSearch(data,filter){
+		var url = "https://api.github.com/search/users?q="+data;
+		$.each(filter,(key,val) => {
+			url += '+'+key+":"+val;
+		})
+		if(data.length > 2){
+			fetch(url)
+			.then((response)=>{
+				if (response.ok) {
+			    	response.json()
+			    	.then(json => {
+			    		console.log(json)
+    					this.setState({'data':json});
+			    	});
+			  	}
+			})
+		}else if(data == ''){
+    		this.setState({'data':''});
+		}
 	}
 
 	showUser(userkey){
