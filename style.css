@@ -1,6 +1,9 @@
 #searchlist{
 	float: left;
 }
+#searchlist li{
+	cursor: pointer;
+}
 
 #userprofile{
 	float: right;
