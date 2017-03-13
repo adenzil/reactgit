@@ -1,0 +1,8 @@
+#searchlist{
+	float: left;
+}
+
+#userprofile{
+	float: right;
+	margin-right: 100px;
+}
