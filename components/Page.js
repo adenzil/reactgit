@@ -34,7 +34,6 @@ export default class Page extends React.Component{
 				if (response.ok) {
 			    	response.json()
 			    	.then(json => {
-			    		console.log(json)
     					this.setState({'data':json});
 			    	});
 			  	}

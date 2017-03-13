@@ -10,14 +10,14 @@ export default class Search extends React.Component{
 			case 27:
 					document.getElementById('search').value = '';
 			default:
-					let value = e.target.value;
-					this.checkfilter(value);
+					this.checkfilter();
 					break;
 		}
 	}
 
-	checkfilter = (value) => {
-		let filter = {}
+	checkfilter = () => {
+		var filter = {}
+		let value = document.getElementById('search').value;
 		let namefilter = $('#namefilter').val();
 		if(namefilter){
 			filter['in'] = namefilter;
@@ -28,8 +28,12 @@ export default class Search extends React.Component{
 	render(){
 		return (
 			<div>
-				Search : <input type="text" id ="search" onKeyUp={this.handleKeyPress.bind(this)} placeholder="enter atleast 2 char" />	
-				<select id="namefilter">
+				Search : 
+				<br/>
+				<br/>
+				Name : <input type="text" id ="search" onKeyUp={this.handleKeyPress.bind(this)} placeholder="enter atleast 2 char" />	
+				&nbsp;&nbsp;
+				<select id="namefilter" onChange={this.checkfilter.bind(this)}>
 					<option value=''></option>
 					<option value='login'>username</option>
 					<option value='email'>email</option>
