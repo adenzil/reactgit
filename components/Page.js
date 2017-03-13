@@ -16,7 +16,8 @@ export default class Page extends React.Component{
 			user:{
 				'avatar_url': "",
 				'id': ''
-			}
+			},
+			repos:[]
 		};
 	}
 
@@ -26,6 +27,16 @@ export default class Page extends React.Component{
 
 	showUser(userkey){
 		this.setState({'user': this.state.data.items[userkey]})
+		fetch("https://api.github.com/users/"+this.state.data.items[userkey].login+"/repos")
+		.then((response)=>{
+			if (response.ok) {
+		    	response.json()
+		    	.then(json => {
+		    		console.log(json)
+		      		this.setState({'repos':json})
+		    	});
+		  	}
+		})
 	}
 
 	render(){
@@ -39,7 +50,7 @@ export default class Page extends React.Component{
 				<List data={this.state.data} showUser={this.showUser.bind(this)} />
 				<br/>
 				<br/>
-				<User user={this.state.user} />
+				<User user={this.state.user} repos={this.state.repos} />
 			</div>
 		)
 	}

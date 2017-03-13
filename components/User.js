@@ -1,5 +1,7 @@
 import React from 'react';
 
+import Repos from './Repos'
+
 export default class User extends React.Component{
 	
 	render(){
@@ -9,6 +11,9 @@ export default class User extends React.Component{
 				<br/>
 				<br/>
 				<img src={this.props.user.avatar_url} />
+				<br/>
+				<br/>
+				Repos : <br/> <Repos repos={this.props.repos}/>
 			</div>
 		)
 	}
